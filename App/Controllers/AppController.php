@@ -17,4 +17,19 @@
                 header('location: /?acesso=erro');
             }
         }
+
+        public function tweet() {
+            session_start();
+        
+            //verificar se os dados estão preenchidos para mostrar a página restrita
+            if($_SESSION['id'] != '' && $_SESSION['nome'] != '') {
+                
+                echo '<pre>';
+                print_r($_POST);
+                echo '<pre>';
+
+            } else {
+                header('location: /?acesso=erro');
+            }
+        }
     }

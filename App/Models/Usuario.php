@@ -2,7 +2,7 @@
     namespace App\Models;
     
     use MF\Model\Model;
-use PDO;
+    use PDO;
 
     class Usuario extends Model {
         private $id;
