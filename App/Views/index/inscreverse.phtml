@@ -33,11 +33,16 @@
                 <small class="form-text">
                   Ao inscrever-se, você concorda com os Termos de Serviço e com as Políticas de Privacidade, incluindo o Uso de Cookies. Outras pessoas poderão encontrar você pelo e-mail ou número de telefone fornecido · Opções de Privacidade
                 </small>
+                <small class="form-text">
+                  <a href="/">Já tenho um cadastro!</a>
+                </small>
               </div>
               <button type="submit" class="btn btn-primary btn-block">Inscrever-se</button>
               
-              <?php if($this->view->erroCadastro) { ?>
+              <?php if(@$this->view->erroCadastro) { ?>
                 <small class="form-text text-danger">Erro ao tentar realizar o cadastro. Verifique se os campos foram preenchidos corretamente.</small>
+              <?php } else if($this->view->erroCadastro2) { ?>
+                <small class="form-text text-danger">Já existe um usuário com este email. Faça login ou insira um e-mail válido.</small>
               <?php } ?>
             </form>
 

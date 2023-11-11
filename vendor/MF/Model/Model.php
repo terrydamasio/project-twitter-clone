@@ -1,6 +1,4 @@
 <?php
-
-
 	namespace MF\Model;
 
 	abstract class Model {

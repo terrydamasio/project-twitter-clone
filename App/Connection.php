@@ -9,7 +9,7 @@
 				$conn = new \PDO(
 					"mysql:host=localhost;dbname=twitter;charset=utf8",
 					"root",
-					"root" 
+					"#Terrydamasio2021" 
 				);
 
 				return $conn;
