@@ -8,28 +8,47 @@
 	class AppController extends Action {
 
         public function timeline() {
-            session_start();
-        
+
             //verificar se os dados estão preenchidos para mostrar a página restrita
-            if($_SESSION['id'] != '' && $_SESSION['nome'] != '') {
-                $this->render('timeline');
-            } else {
-                header('location: /?acesso=erro');
-            }
+            $this->validaAutenticacao();
+
+            //recuperação dos tweets
+            $tweet = Container::getModel('Tweet');
+
+            //passar o parâmetro do id_usuario para recuperar tweets do usuário
+            $tweet->__set('id_usuario', $_SESSION['id'] );
+            $tweets = $tweet->recuperarTweet();
+
+            //criando atributo dinâmico
+            $this->view->tweets = $tweets;
+
+            $this->render('timeline');
+            
         }
 
         public function tweet() {
-            session_start();
         
             //verificar se os dados estão preenchidos para mostrar a página restrita
-            if($_SESSION['id'] != '' && $_SESSION['nome'] != '') {
+            $this->validaAutenticacao();
                 
-                echo '<pre>';
-                print_r($_POST);
-                echo '<pre>';
+            $tweet = Container::getModel('Tweet');
+            $tweet->__set('tweet', $_POST['tweet']);
+            $tweet->__set('id_usuario', $_SESSION['id']);
 
-            } else {
-                header('location: /?acesso=erro');
-            }
+            $tweet->salvarTweet();
+
+            header('location: /timeline');
+
+        
         }
+
+        public function validaAutenticacao() {
+
+            session_start();
+
+            if(!isset($_SESSION['id']) || $_SESSION['id'] == '' || !isset($_SESSION['nome']) || $_SESSION['nome'] == '') {
+                header('location: /?login=erro');
+            } 
+        }
+
     }

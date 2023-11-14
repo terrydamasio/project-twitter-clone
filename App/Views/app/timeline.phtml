@@ -8,7 +8,9 @@
 	  	<a class="menuItem" href="/sair">
 	  		Sair
 	  	</a>
+		<a href="/timeline">
 			<img src="/img/twitter_logo.png" class="menuIco" />
+		</a>
 	  </div>
 	</div>
 </nav>
@@ -27,7 +29,7 @@
 					
 					<div class="row mt-2 mb-2">
 						<div class="col mb-2">
-							<span class="perfilPainelNome">Nome do Usuário</span>
+							<span class="perfilPainelNome"><?= $_SESSION['nome'] ?></span>
 						</div>
 					</div>
 
@@ -47,7 +49,6 @@
 							<span class="perfilPainelItem">Seguidores</span><br />
 							<span class="perfilPainelItemValor">0</span>
 						</div>
-
 					</div>
 
 				</div>
@@ -68,11 +69,11 @@
 					</form>
 				</div>
 			</div>
-
+			<?php foreach($this->view->tweets as $id => $tweet) { //PERCORRER OS TWEETS PARA ACESSAR OS ATRIBUTOS?>
 			<div class="row tweet">
 				<div class="col">
-					<p><strong>Nome do Usuário</strong> <span class="text text-muted">- data tweet</span></p>
-					<p>Conteúdo do tweet</p>
+					<p><strong><?= $tweet['nome'] ?></strong> <span class="text text-muted"><?= $tweet['data'] ?></span></p>
+					<p><?= $tweet['tweet'] ?></p>
 
 					<br />
 					<form>
@@ -82,21 +83,7 @@
 					</form>
 				</div>
 			</div>
-
-			<div class="row tweet">
-				<div class="col">
-					<p><strong>Nome do Usuário</strong> <span class="text text-muted">- data tweet</span></p>
-					<p>Conteúdo do tweet</p>
-
-					<br />
-					<form>
-						<div class="col d-flex justify-content-end">
-							<button type="submit" class="btn btn-danger"><small>Remover</small></button>
-						</div>
-					</form>		
-				</div>
-			</div>
-
+			<?php } ?>
 
 		</div>
 
