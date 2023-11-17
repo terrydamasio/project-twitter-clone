@@ -42,8 +42,26 @@
         
         }
 
-        public function validaAutenticacao() {
+        public function quemSeguir() {
 
+            //verificar se os dados estão preenchidos para mostrar a página restrita
+            $this->validaAutenticacao();
+
+            $pesquisarUsuario = isset($_GET['pesquisarUsuario']) ? $_GET['pesquisarUsuario'] : '';
+            $usuarios = array();
+
+            if($pesquisarUsuario != '') {
+                $usuario = Container::getModel('Usuario');
+                $usuario->__set('nome', $pesquisarUsuario);
+                $usuarios = $usuario->getAllUsers();
+            }
+
+            $this->view->usuarios = $usuarios; 
+
+            $this->render('quemSeguir');
+        }
+
+        public function validaAutenticacao() {
             session_start();
 
             if(!isset($_SESSION['id']) || $_SESSION['id'] == '' || !isset($_SESSION['nome']) || $_SESSION['nome'] == '') {
