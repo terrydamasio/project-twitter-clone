@@ -10,14 +10,15 @@
         public function autenticar() {
 
             $usuario = Container::getModel('Usuario');
+
             $usuario->__set('email', $_POST['email']);
             $usuario->__set('senha', md5($_POST['senha']));
 
-            $autenticar = $usuario->autenticar();
+            $usuario->autenticar();
             
             //validar se usuário for autenticado
-            if(!empty($usuario->__get('id')) && !empty($usuario->__get('id'))) {
-                session_start();
+            if(!empty($usuario->__get('id')) && !empty($usuario->__get('nome'))) {
+                session_start ();
 
                 $_SESSION['id'] = $usuario->__get('id');
                 $_SESSION['nome'] = $usuario->__get('nome');

@@ -27,7 +27,6 @@
         }
 
         public function tweet() {
-        
             //verificar se os dados estão preenchidos para mostrar a página restrita
             $this->validaAutenticacao();
                 
@@ -38,8 +37,6 @@
             $tweet->salvarTweet();
 
             header('location: /timeline');
-
-        
         }
 
         public function quemSeguir() {
@@ -53,6 +50,8 @@
             if($pesquisarUsuario != '') {
                 $usuario = Container::getModel('Usuario');
                 $usuario->__set('nome', $pesquisarUsuario);
+                // recuperando id do usuário da sessão para não listar ele ao procurar por nomes
+                $usuario->__set('id', $_SESSION['id']);
                 $usuarios = $usuario->getAllUsers();
             }
 
@@ -60,6 +59,27 @@
 
             $this->render('quemSeguir');
         }
+
+        public function acao() {
+            //verificar se os dados estão preenchidos para mostrar a página restrita
+            $this->validaAutenticacao();
+
+            $acao = isset($_GET['acao']) ? $_GET['acao'] : '';
+            $id_usuario_seguindo = isset($_GET['id_usuario']) ? $_GET['id_usuario'] : '';
+
+            $usuario = Container::getModel('Usuario');
+            $usuario->__set('id', $_SESSION['id']);
+
+            if($acao == 'seguir') {
+                $usuario->seguirUsuario($id_usuario_seguindo);
+
+            } else if ($acao == 'deixar_de_seguir') {
+                $usuario->deixarSeguirUsuario($id_usuario_seguindo);
+            }
+
+            header('location: /quemSeguir');
+        }
+
 
         public function validaAutenticacao() {
             session_start();

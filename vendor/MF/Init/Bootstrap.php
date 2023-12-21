@@ -21,16 +21,22 @@ abstract class Bootstrap {
 	}
 
 	protected function run($url) {
+		$found = false;
+
 		foreach ($this->getRoutes() as $key => $route) {
 			if($url == $route['route']) {
+				$found = true;
+				
 				$class = "App\\Controllers\\".ucfirst($route['controller']);
 
 				$controller = new $class;
-				
 				$action = $route['action'];
-
 				$controller->$action();
 			}
+		}
+
+		if (!$found) {
+			echo "<p style='color: red;'>Erro: recurso não encontrado.</p>";
 		}
 	}
 
