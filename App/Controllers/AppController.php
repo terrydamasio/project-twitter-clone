@@ -72,14 +72,27 @@
 
             if($acao == 'seguir') {
                 $usuario->seguirUsuario($id_usuario_seguindo);
-
             } else if ($acao == 'deixar_de_seguir') {
                 $usuario->deixarSeguirUsuario($id_usuario_seguindo);
             }
 
-            header('location: /quemSeguir');
+            header('location: /quem_seguir');
         }
 
+        public function removerTweet() {
+            
+            //verificar se os dados estão preenchidos para mostrar a página restrita
+            $this->validaAutenticacao();
+
+            //recuperação dos tweets
+            $tweet = Container::getModel('Tweet');
+            //$tweet->__set('id', $_GET);
+            print_r($_GET);
+            //$tweet->removerTweet();
+            //header('location: /timeline');
+
+
+        }
 
         public function validaAutenticacao() {
             session_start();

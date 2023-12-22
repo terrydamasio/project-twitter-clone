@@ -81,7 +81,7 @@
         public function getAllUsers() {
             $query = "
                 select 
-                    u.id, u.nome, u.email
+                    u.id, u.nome, u.email,
                     (
                         select 
                             count(*)
