@@ -18,7 +18,7 @@
             
             //validar se usuário for autenticado
             if(!empty($usuario->__get('id')) && !empty($usuario->__get('nome'))) {
-                session_start ();
+                session_start     ();
 
                 $_SESSION['id'] = $usuario->__get('id');
                 $_SESSION['nome'] = $usuario->__get('nome');
