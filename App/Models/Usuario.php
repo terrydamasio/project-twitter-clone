@@ -124,6 +124,10 @@
             return true;
         }
 
+        public function usuariosSeguindo() {
+            
+        }
+
 
 
     }

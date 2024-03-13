@@ -37,7 +37,7 @@
 
 						<div class="col">
 							<span class="perfilPainelItem">Tweets</span><br />
-							<span class="perfilPainelItemValor">0</span>
+							<span class="perfilPainelItemValor"><?php print_r($this->view->countTweets); ?>/span>
 						</div>
 
 						<div class="col">
@@ -76,7 +76,7 @@
 					<p><?= $tweet['tweet'] ?></p>
 					<br />
 					<?php if($tweet['id_usuario'] == $_SESSION['id']) { ?>
-						<form action="/removerTweet?<?=$tweet['id_usuario']?>" method="post">
+						<form action="/removerTweet?id_usuario=<?=$tweet['id_usuario']?>&id=<?=$tweet['id']?>" method="post">
 							<div class="col d-flex justify-content-end">
 								<button type="submit" class="btn btn-danger"><small>Remover</small></button>
 							</div>

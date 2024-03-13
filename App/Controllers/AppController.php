@@ -18,9 +18,11 @@
             //passar o parâmetro do id_usuario para recuperar tweets do usuário
             $tweet->__set('id_usuario', $_SESSION['id'] );
             $tweets = $tweet->recuperarTweet();
+            $countTweets = $tweet->contarTweets();
 
             //criando atributo dinâmico
             $this->view->tweets = $tweets;
+            $this->view->countTweets = $countTweets;
 
             $this->render('timeline');
             
@@ -86,12 +88,11 @@
 
             //recuperação dos tweets
             $tweet = Container::getModel('Tweet');
-            //$tweet->__set('id', $_GET);
-            print_r($_GET);
-            //$tweet->removerTweet();
-            //header('location: /timeline');
 
-
+            $tweet->__set('id_usuario', $_GET['id_usuario']);
+            $tweet->__set('id', $_GET['id']);
+            $tweet->removerTweet();
+            header('location: /timeline');
         }
 
         public function validaAutenticacao() {

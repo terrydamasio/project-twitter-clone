@@ -68,8 +68,6 @@
 				'action' => 'removerTweet'
 			);
 
-
-
 			$this->setRoutes($routes);
 		}
 

@@ -51,4 +51,26 @@
             return $stmt->fetchAll(\PDO::FETCH_ASSOC);
         }
 
+        public function contarTweets() {
+            $query = "
+                select COUNT(:id_usuario) AS quantidade_posts
+                FROM tweets where id_usuario = :id_usuario
+            ";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
+            $stmt->execute();
+            
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        }
+
+        public function removerTweet() {
+            $query = "DELETE FROM tweets WHERE id = :id and id_usuario = :id_usuario";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindValue(':id', $this->__get('id'));
+            $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
+            $stmt->execute();
+
+            return $this;
+        }
+
     }
