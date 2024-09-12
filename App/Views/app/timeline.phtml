@@ -37,12 +37,20 @@
 
 						<div class="col">
 							<span class="perfilPainelItem">Tweets</span><br />
-							<span class="perfilPainelItemValor"><?php print_r($this->view->countTweets); ?>/span>
+							<span class="perfilPainelItemValor">
+								<?php foreach($this->view->countTweets as $count) {
+									echo $count['quantidade_posts'];
+								} ?>
+							</span>
 						</div>
 
 						<div class="col">
 							<span class="perfilPainelItem">Seguindo</span><br />
-							<span class="perfilPainelItemValor">0</span>
+							<span class="perfilPainelItemValor">
+								<?php foreach($this->view->following as $count) {
+									echo $count['usuarios_seguindo'];
+								} ?>
+							</span>
 						</div>
 
 						<div class="col">

@@ -125,7 +125,27 @@
         }
 
         public function usuariosSeguindo() {
+            $query = "
+                select COUNT(*) AS usuarios_seguindo
+                FROM usuarios_seguidores where id_usuario = :id_usuario
+            ";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
+            $stmt->execute();
             
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        }
+
+        public function usuariosSeguidores() {
+            $query = "
+                select COUNT(*) AS usuarios_seguidores
+                FROM usuarios_seguidores where id_usuario = :id_usuario
+            ";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindValue(':id_usuario', $this->__get('id_usuario'));
+            $stmt->execute();
+            
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
         }
 
 

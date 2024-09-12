@@ -14,18 +14,25 @@
 
             //recuperação dos tweets
             $tweet = Container::getModel('Tweet');
+            $user = Container::getModel('Usuario');
 
             //passar o parâmetro do id_usuario para recuperar tweets do usuário
             $tweet->__set('id_usuario', $_SESSION['id'] );
+            $user->__set('id_usuario', $_SESSION['id'] );
+
             $tweets = $tweet->recuperarTweet();
             $countTweets = $tweet->contarTweets();
+            
+            $following = $user->usuariosSeguindo();
+            $followers = $user->usuariosSeguidores();
 
             //criando atributo dinâmico
             $this->view->tweets = $tweets;
             $this->view->countTweets = $countTweets;
+            $this->view->following = $following;
+            $this->view->followers = $followers;
 
             $this->render('timeline');
-            
         }
 
         public function tweet() {
